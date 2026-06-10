@@ -1,9 +1,11 @@
-import { Download, Shield, Cloud, Layout, Zap, Lock, Command, Video, CheckCircle } from 'lucide-react';
+import { Download, Shield, Cloud, Layout, Zap, Lock, Command, Video, CheckCircle, Loader2 } from 'lucide-react';
 import useSystemDetection from '../hooks/useSystemDetection';
+import useGithubRelease from '../hooks/useGithubRelease';
 import './Home.css';
 
 function Home() {
   const { os, isBodhiSync } = useSystemDetection();
+  const { downloadLatestRelease, isDownloading } = useGithubRelease();
 
   return (
     <div className="home-page animate-fade-in">
@@ -12,17 +14,17 @@ function Home() {
         <div className="glow glow-1"></div>
         <div className="glow glow-2"></div>
       </div>
-      
+
       <div className="container">
-        
+
         {/* Hero Header */}
         <header className="hero-header delay-100 animate-fade-in">
-          <div className="hero-meta mono-text">B-SYNC // VERSION 1.1.3</div>
+          <div className="hero-meta mono-text">B-SYNC // THE NEW STANDARD</div>
           <h1 className="hero-title">Bodhi Sync Browser</h1>
           <p className="hero-subtitle">
             A clean, customizable, and sync-capable browsing experience completely free from clutter, trackers, and walled gardens.
           </p>
-          
+
           <div className="search-bar-mockup">
             <Command size={18} className="search-icon" />
             <span>{isBodhiSync ? 'You are using Bodhi-Sync Browser!' : `Download B-Sync for ${os !== 'Unknown' ? os : 'PC'}`}</span>
@@ -31,8 +33,16 @@ function Home() {
                 <CheckCircle size={14} style={{ marginRight: '4px' }} /> Installed
               </button>
             ) : (
-              <button className="btn-download">
-                <Download size={14} style={{ marginRight: '4px' }} /> Download
+              <button
+                className="btn-download"
+                onClick={() => downloadLatestRelease(os)}
+                disabled={isDownloading}
+              >
+                {isDownloading ? (
+                  <><Loader2 size={14} className="animate-spin" style={{ marginRight: '4px' }} /> Fetching...</>
+                ) : (
+                  <><Download size={14} style={{ marginRight: '4px' }} /> Download</>
+                )}
               </button>
             )}
           </div>
@@ -40,7 +50,7 @@ function Home() {
 
         {/* Bento Grid Features */}
         <section className="bento-grid delay-200 animate-fade-in">
-          
+
           <div className="bento-card glass-panel bento-large">
             <div className="card-header">
               <span className="mono-text">CORE // SYNC</span>

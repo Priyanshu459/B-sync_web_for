@@ -1,11 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Download, CheckCircle } from 'lucide-react';
+import { Download, CheckCircle, Loader2 } from 'lucide-react';
 import useSystemDetection from '../hooks/useSystemDetection';
+import useGithubRelease from '../hooks/useGithubRelease';
 import './Navbar.css';
 
 function Navbar() {
   const location = useLocation();
   const { os, isBodhiSync } = useSystemDetection();
+  const { downloadLatestRelease, isDownloading } = useGithubRelease();
 
   return (
     <nav className="navbar">
@@ -23,10 +25,15 @@ function Navbar() {
               <span>Using Bodhi-Sync</span>
             </div>
           ) : (
-            <a href="#download" className="nav-button" aria-label={`Download B-Sync Browser for ${os}`}>
-              <Download size={18} />
-              <span>Download {os !== 'Unknown' ? `for ${os}` : ''}</span>
-            </a>
+            <button 
+              className="nav-button" 
+              onClick={() => downloadLatestRelease(os)}
+              disabled={isDownloading}
+              style={{ border: 'none', cursor: isDownloading ? 'wait' : 'pointer' }}
+            >
+              {isDownloading ? <Loader2 size={18} className="animate-spin" /> : <Download size={18} />}
+              <span>{isDownloading ? 'Fetching...' : `Download ${os !== 'Unknown' ? `for ${os}` : ''}`}</span>
+            </button>
           )}
         </div>
       </div>
