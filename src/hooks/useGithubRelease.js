@@ -12,7 +12,8 @@ export default function useGithubRelease() {
     setError(null);
 
     try {
-      const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/releases/latest`);
+      // Fetch from our own Cloudflare proxy instead of GitHub directly to bypass adblockers
+      const response = await fetch('/api/latest-release');
       
       if (!response.ok) {
         throw new Error('Failed to fetch release info. Have you published a release on GitHub yet?');
@@ -46,11 +47,7 @@ export default function useGithubRelease() {
     } catch (err) {
       console.error('Download error:', err);
       setError(err.message);
-      
-      // Fallback: If an adblocker blocks api.github.com, redirect them to the release page directly!
-      alert("Direct download was blocked by your browser's security or adblocker.\n\nRedirecting you to the secure GitHub download page instead!");
-      window.location.href = `https://github.com/${GITHUB_REPO}/releases/latest`;
-      
+      alert(`Download failed: ${err.message}\nPlease try again later.`);
     } finally {
       setIsDownloading(false);
     }
