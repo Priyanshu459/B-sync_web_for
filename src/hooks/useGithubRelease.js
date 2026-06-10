@@ -46,7 +46,11 @@ export default function useGithubRelease() {
     } catch (err) {
       console.error('Download error:', err);
       setError(err.message);
-      alert(`Download failed: ${err.message}\nPlease check your GitHub repository name or create a release.`);
+      
+      // Fallback: If an adblocker blocks api.github.com, redirect them to the release page directly!
+      alert("Direct download was blocked by your browser's security or adblocker.\n\nRedirecting you to the secure GitHub download page instead!");
+      window.location.href = `https://github.com/${GITHUB_REPO}/releases/latest`;
+      
     } finally {
       setIsDownloading(false);
     }
