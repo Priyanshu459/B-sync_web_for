@@ -20,7 +20,10 @@ function Home() {
         {/* Hero Header */}
         <header className="hero-header delay-100 animate-fade-in">
           <div className="hero-meta mono-text">B-SYNC // THE NEW STANDARD</div>
-          <h1 className="hero-title">Bodhi Sync Browser</h1>
+          <h1 className="hero-title">
+            Bodhi Sync Browser 
+            <span style={{ fontSize: '0.4em', verticalAlign: 'middle', background: 'var(--primary-glow)', padding: '4px 12px', borderRadius: '12px', color: '#000', marginLeft: '12px', fontWeight: 'bold' }}>v1.1.4</span>
+          </h1>
           <p className="hero-subtitle">
             A clean, customizable, and sync-capable browsing experience completely free from clutter, trackers, and walled gardens.
           </p>
