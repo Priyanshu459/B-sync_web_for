@@ -108,3 +108,30 @@
   border-radius: 50%;
   background: var(--accent-blue);
 }
+
+.update-description {
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.update-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 10px;
+}
+
+.update-section h4 {
+  font-size: 17px;
+  color: var(--text-main);
+  margin-bottom: 12px;
+}
+
+.update-section-desc {
+  color: var(--text-muted);
+  font-size: 15px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}

@@ -1,4 +1,4 @@
-import { Download, Shield, Cloud, Layout, Zap, Lock, Command, Video, CheckCircle, Loader2 } from 'lucide-react';
+import { Download, Shield, Cloud, Layout, Zap, Lock, Command, Video, CheckCircle, Loader2, Columns } from 'lucide-react';
 import useSystemDetection from '../hooks/useSystemDetection';
 import useGithubRelease from '../hooks/useGithubRelease';
 import './Home.css';
@@ -22,7 +22,7 @@ function Home() {
           <div className="hero-meta mono-text">B-SYNC // THE NEW STANDARD</div>
           <h1 className="hero-title">
             Bodhi Sync Browser 
-            <span style={{ fontSize: '0.4em', verticalAlign: 'middle', background: 'var(--primary-glow)', padding: '4px 12px', borderRadius: '12px', color: '#000', marginLeft: '12px', fontWeight: 'bold' }}>v1.1.4</span>
+            <span style={{ fontSize: '0.4em', verticalAlign: 'middle', background: 'var(--primary-glow)', padding: '4px 12px', borderRadius: '12px', color: '#000', marginLeft: '12px', fontWeight: 'bold' }}>v1.1.5</span>
           </h1>
           <p className="hero-subtitle">
             A clean, customizable, and sync-capable browsing experience completely free from clutter, trackers, and walled gardens.
@@ -132,6 +132,20 @@ function Home() {
               </div>
               <h3>Record Browser</h3>
               <p className="text-muted">Natively record your browser sessions. Built specifically to capture only the browser window without exposing your entire screen.</p>
+            </div>
+          </div>
+
+          <div className="bento-card glass-panel bento-full">
+            <div className="card-header">
+              <span className="mono-text">MULTITASKING</span>
+              <div className="status-dot blue"></div>
+            </div>
+            <div className="card-content">
+              <div className="feature-icon-wrapper">
+                <Columns size={24} />
+              </div>
+              <h3>Native Split-Screen & Multi-Tab</h3>
+              <p className="text-muted">Simultaneously run and manage multiple tabs side-by-side in a seamless, fluid grid layout with zero lag.</p>
             </div>
           </div>
 
