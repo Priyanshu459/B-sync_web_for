@@ -7,13 +7,14 @@ export default function useGithubRelease() {
   const [isDownloading, setIsDownloading] = useState(false);
   const [error, setError] = useState(null);
 
-  const downloadLatestRelease = async (os) => {
+  const downloadLatestRelease = async (os, isAndroidReq = false) => {
     setIsDownloading(true);
     setError(null);
 
     try {
-      // Fetch from our own Cloudflare proxy instead of GitHub directly to bypass adblockers
-      const response = await fetch('/api/latest-release');
+      // Fetch from the correct API based on the button clicked
+      const endpoint = isAndroidReq ? '/api/latest-android-release' : '/api/latest-release';
+      const response = await fetch(endpoint);
       
       if (!response.ok) {
         throw new Error('Failed to fetch release info. Have you published a release on GitHub yet?');
@@ -28,7 +29,9 @@ export default function useGithubRelease() {
       // Find the correct asset based on the user's OS
       let targetAsset = null;
 
-      if (os === 'Windows') {
+      if (isAndroidReq || os === 'Android') {
+        targetAsset = data.assets.find(asset => asset.name.endsWith('.apk'));
+      } else if (os === 'Windows') {
         targetAsset = data.assets.find(asset => asset.name.endsWith('.exe'));
       } else if (os === 'MacOS') {
         targetAsset = data.assets.find(asset => asset.name.endsWith('.dmg') || asset.name.endsWith('.pkg') || asset.name.endsWith('.zip'));

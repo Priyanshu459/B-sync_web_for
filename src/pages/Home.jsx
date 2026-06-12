@@ -51,14 +51,14 @@ function Home() {
                     <><Download size={14} style={{ marginRight: '4px' }} /> PC</>
                   )}
                 </button>
-                <a 
-                  href="https://github.com/Priyanshu459/B-sync_for_android/releases/latest/download/app-debug.apk" 
-                  className="btn-download" 
-                  style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}
+                <button
+                  className="btn-download"
+                  onClick={() => downloadLatestRelease('Android', true)}
+                  disabled={isDownloading}
                   title="Download for Android"
                 >
                   <Download size={14} style={{ marginRight: '4px' }} /> Android
-                </a>
+                </button>
               </div>
             )}
           </div>
