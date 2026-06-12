@@ -28,25 +28,38 @@ function Home() {
             A clean, customizable, and sync-capable browsing experience completely free from clutter, trackers, and walled gardens.
           </p>
 
-          <div className="search-bar-mockup">
-            <Command size={18} className="search-icon" />
-            <span>{isBodhiSync ? 'You are using Bodhi-Sync Browser!' : `Download B-Sync for ${os !== 'Unknown' ? os : 'PC'}`}</span>
+          <div className="search-bar-mockup" style={{ paddingRight: '12px', gap: '12px' }}>
+            <Command size={18} className="search-icon" style={{ flexShrink: 0 }} />
+            <span style={{ flexGrow: 1, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+              {isBodhiSync ? 'You are using Bodhi-Sync Browser!' : `Download B-Sync`}
+            </span>
             {isBodhiSync ? (
-              <button className="btn-download" style={{ backgroundColor: '#10b981', color: 'white', borderColor: '#10b981', cursor: 'default' }}>
+              <button className="btn-download" style={{ backgroundColor: '#10b981', color: 'white', borderColor: '#10b981', cursor: 'default', flexShrink: 0 }}>
                 <CheckCircle size={14} style={{ marginRight: '4px' }} /> Installed
               </button>
             ) : (
-              <button
-                className="btn-download"
-                onClick={() => downloadLatestRelease(os)}
-                disabled={isDownloading}
-              >
-                {isDownloading ? (
-                  <><Loader2 size={14} className="animate-spin" style={{ marginRight: '4px' }} /> Fetching...</>
-                ) : (
-                  <><Download size={14} style={{ marginRight: '4px' }} /> Download</>
-                )}
-              </button>
+              <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
+                <button
+                  className="btn-download"
+                  onClick={() => downloadLatestRelease(os)}
+                  disabled={isDownloading}
+                  title="Download for Windows, Mac, or Linux"
+                >
+                  {isDownloading ? (
+                    <><Loader2 size={14} className="animate-spin" style={{ marginRight: '4px' }} /> Fetching...</>
+                  ) : (
+                    <><Download size={14} style={{ marginRight: '4px' }} /> PC</>
+                  )}
+                </button>
+                <a 
+                  href="https://github.com/Priyanshu459/B-sync_for_android/releases/latest/download/app-debug.apk" 
+                  className="btn-download" 
+                  style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}
+                  title="Download for Android"
+                >
+                  <Download size={14} style={{ marginRight: '4px' }} /> Android
+                </a>
+              </div>
             )}
           </div>
         </header>
